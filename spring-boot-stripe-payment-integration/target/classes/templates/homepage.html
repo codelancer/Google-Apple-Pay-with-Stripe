@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<head>
+    <title>Homepage</title>
+    <!--Bootstrap 4 CSS-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--Bootstrap 4 JavaScript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-light pt-5">
+
+<!--hero section-->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-10 col-12 my-auto mx-auto text-center">
+                <h1>
+                    Stripe Payment
+                </h1>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <img src="leather-bag.jpg" alt="leather-bag" width="400" height="300">
+                        <p class="lead">USD 9.99</p>
+                    </div>
+                </div>
+                <p class="lead mb-4">
+                    What would you like to pay?
+                </p>
+                <a class="btn btn-success" th:href="@{/charge}">Pay</a><br>
+                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" id="sandboxForm">
+<!--                    <input type="hidden" name="business" value="sb-l6mbr25025458@business.example.com">-->
+                    <input type="hidden" name="business" th:value="${sandID}">
+                    <input type="hidden" id = 'fff' name="cmd" value="_xclick">
+                    <input type="hidden" name="item_name" value="Test Item">
+                    <input type="hidden" name="item_number" value="123">
+<!--                    <input name = "amount" type="hidden" th:value="${payAmount}">-->
+                    <input type="hidden" name="amount" value="9.99">
+                    <input type="hidden" name="currency_code" value="USD">
+                </form>
+                <a style="color:blue" id ='sandbox' onclick="handleSubmit()">Sandbox</a>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+function handleSubmit(){
+    document.getElementById('sandboxForm').submit();
+}
+</script>
+<style>
+    #sandbox:hover{
+        cursor: pointer;
+        border-bottom: 1px solid blue;
+    }
+</style>
+</body>
+</html>
